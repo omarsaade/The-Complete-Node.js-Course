@@ -1,0 +1,2 @@
+fs module : mohemta to deal with files (create,,read,,delete..)
+http module : allow us to listen on a specific port and receive http req and send http request
