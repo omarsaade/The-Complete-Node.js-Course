@@ -46,3 +46,11 @@ server.listen(PORT, () => {
 
 =======================================================
 node js object is the event emitter object.
+
+Removing Listener: The eventEmitter.removeListener() takes two argument 
+event and listener, and removes that listener from the listeners array that is 
+subscribed to that event. While eventEmitter.removeAllListeners()
+ removes all the listener from the array which are subscribed to the mentioned event.
+
+ //eventEmitter.removeListener(event, listener)
+//eventEmitter.removeAllListeners([event])
