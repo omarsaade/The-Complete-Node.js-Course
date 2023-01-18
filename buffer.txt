@@ -1,0 +1,210 @@
+always specify the character encoding.
+utf-8  encoding standard - encoding system
+by defaults its utf-8
+character sets - character encoding - unicode characters fia osas men el ascci
+unicode vs ascii
+8 bits =  one byte 
+01110100 = 116 bel decimal = 1byte
+========================================
+
+                            Buffers
+
+
+
+A Buffer is a container in memory that has a fixed length size
+
+
+buffer is a container in memory that
+has a fixed length size in this case it's a two byte buffer that gets in some data
+some raw binary data some zeros and ones and then it quickly sends it on to
+another place so that's basically a buffer
+it gets in some data and then it sends it out just like that and along the way we
+would do some processing on it we would get the data in the buffer and then we would
+ pull it out and do some processing
+on it that's the idea of a buffer now we might be saying hey why on earth
+we have something called buffers in node.js and the reason is javascript itself
+
+on it that's the idea of a buffer now we might be saying hey why on earth
+21:26
+we have something called buffers in node.js and the reason is javascript itself
+21:31
+isn't good at all in dealing with raw binary data and node.js because it's a web server
+21:37
+technology it needs to have a way to be able to deal with files and to deal with network requests and as you already know
+21:44
+files and everything is just binary it's just zeros and ones and in order for node.js to be able to deal with files it
+21:51
+needs to have a good way to deal with raw binary data that's why buffers were introduced in
+21:57
+node.js because javascript didn't have a good way to deal with raw binary data and it
+22:03
+needed to solve that problem in order to be a good technology for a web server
+22:10
+all right now let's get into coding and see some examples
+==========================================================================
+
+Buffer.alloc()
+The Buffer.alloc() method creates a new buffer of any size.
+ When you use this method, you assign the size of the buffer in bytes. 
+ The expression below creates a buffer with a byte size of 6:
+
+===========================================================
+
+const buff = Buffer.alloc(8); // 8 byte
+console.log(buff);
+
+//  Buffer is available to us globally
+const { Buffer } = require("buffer");
+// there is no need to import but el afdal na3mela include
+const buff = Buffer.alloc(8); // 8 byte
+console.log(buff);
+
+
+
+so this is how we create a buffer right buffer.alec and alec means 
+how many bytes we want to
+give to this container because remember buffer is just a container that we use
+to temporarily hold a fixed length sequence of bytes and this eight is its
+length and it's specified in bytes so now this container in memory has
+eight bytes of storage and if i go ahead and unlock this i'll say console.log
+
+=============================================
+const { Buffer } = require("buffer");
+ there is no need to import but el afdal na3mela include
+ buff : container in memory has 8 bytes
+const buff = Buffer.alloc(8); // 8 bytes
+console.log(buff);
+<Buffer 00 00 00 00 00 00 00 00> empty buffer ..now we can write data on it
+we reserve it
+
+============================================-========================================
+
+
+
+buffer is expressed in hexadecimal number
+const { Buffer } = require("buffer");
+
+const buff = Buffer.alloc(8); // 8 bytes
+
+buff.write("s", "utf-8");
+console.log(buff);
+
+<Buffer 73 00 00 00 00 00 00 00>
+
+
+============================================-========================================
+
+
+<Buffer 3f dd 3e e4 c3 d0 a0>
+
+=========================================================================================
+buff.write("s", "utf-8"); // we can only write binary data on it and this is a string
+//so we have to use encoding to convert it to a sequence of bytes
+// and the character encoding im going to use here is utf-8 and its the default one
+
+
+utf-8 : yaane 8 bits aw 1 byte
+kell character 3ando 1 byte
+
+
+===================================================
+ 
+st   <Buffer 73 74 00 00 00 00 00 00>
+=====================================================
+console.log(buff.toJSON());
+
+PS C:\Users\10User\Documents\The-Complete-Node.js-Course> node app.js
+{
+  type: 'Buffer',  
+  data: [
+    115, 116, 0, 0,
+      0,   0, 0, 0 
+  ]
+}
+============================================================
+ignore them it's not going to return an error but
+it's going to ignore them so these two are identical even though
+in this case i wrote a couple more characters and because it doesn't have the
+ capacity to store them it will just
+ignore them so i want to say the definition of
+buffer one more time it is a place that is being used to temporarily hold a fixed
+ length sequence
+of bytes so it's a buffer and a buffer acts kind of like an array of integers
+however they are not resizable and have many methods available to them
+especially to deal with binary data for example i could write buffer.length
+and log it in this case i'll get eight
+=========================================================================
+
+
+const buff2 = Buffer.from("string", "utf-8");
+console.log(buff2); // <Buffer 73 74 72 69 6e 67>
+
+
+const buff2 = Buffer.from("string", "utf-8"); // automatically allocate and reserve number of bytes
+console.log(buff2); // <Buffer 73 74 72 69 6e 67>
+
+=======================================================
+
+const { Buffer } = require("buffer");
+
+const buff2 = Buffer.from([115, 116, 114], "dec");
+// console.log(buff2); // <Buffer 73>
+console.log(buff2.toString("utf-8")); // s
+
+//iza kenet hajez 8 w katabet 10 lah yetjehal el 2 el a5irin
+// const buff = Buffer.alloc(8); // 8 bytes
+
+// buff.write("s", "utf-8"); // we can only write binary data on it and this is a string
+//so we have to use encoding to convert it to a sequence of bytes
+// and the character encoding im going to use here is utf-8 and its the default one
+
+// const buff2 = Buffer.from("string", "utf-8"); // automatically allocate and reserve number of bytes
+// console.log(buff2); // <Buffer 73 74 72 69 6e 67>
+
+/*
+console.log(buff.toJSON()); // get it in decimal number
+console.log(buff.length); //8
+console.log(buff);
+console.log(buff[0]); //115 return decimal
+let char = String.fromCharCode(65);
+console.log(char); A decimal
+let char = String.fromCharCode("65");
+console.log(char); // A decimal
+so it basically decode that number 65 is A
+String.fromCodePoint // same
+
+*/
+
+=======================================================
+
+now the definition of buffers is here the buffer class in node.js is designed
+
+to handle raw binary data each buffer corresponds to some raw memory allocated outside v8
+
+and buffers act somewhat like arrays of integers we saw this in this video but aren't resizable and have a whole bunch
+
+of methods available to them to deal with binary data we also saw this part and the integer is
+
+in a buffer it represents a byte and so are limited to values from zero
+
+up to 255 we also saw this using our calculator
+
+and when we log a buffer it prints the buffer instance and we get a chain of
+
+values and hexadecimal values so this should now make great sense to
+
+you well the only thing that we didn't quite talk about is this v8 there is another video in this course before this
+
+video and in that video we talked greatly about v8 and what is it
+
+so if you go ahead and watch that you will also understand this sentence here okay and then some
+
+codes how to create buffers and some methods that we have all of which we saw
+
+so you should now understand all of it but come here and read it and play around with it a little bit all right now let's
+
+take a look at its full documentation you could first go to the nodejs.org
+
+website and then click on the documentation and right here on the left sidebar click on buffer
+======================================================
+TypedArrays
