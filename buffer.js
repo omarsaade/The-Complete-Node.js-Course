@@ -110,3 +110,4 @@ console.log(char); // A decimal
 so it basically decode that number 65 is A
 String.fromCodePoint // same
 
+https://blog.logrocket.com/node-js-buffer-complete-guide/
