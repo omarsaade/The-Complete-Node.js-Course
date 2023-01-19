@@ -1,0 +1,122 @@
+console.time();
+let a = 2 + 2;
+console.timeEnd();
+
+========================
+
+                                               
+                                               my method
+
+const fs = require("fs/promises");
+
+const b = Buffer.alloc(1000000).fill("HEllo");
+
+async function bb() {
+  const fileHandle = await fs.open("./test.txt", "a");
+  await fileHandle.write(b.toString());
+}
+
+bb();
+
+
+or   
+/*
+const fs = require("fs/promises");
+
+
+
+async function bb() {
+  for (let i = 0; i < 1000; i++) {
+    const fileHandle = await fs.open("./test.txt", "a");
+
+    await fileHandle.write("hello");
+  }
+}
+
+bb();
+
+*/
+
+
+                                          course method - best
+
+
+                                          const fs = require("fs/promises");
+// Execution Time : 59s 
+
+// CPU Usage: 100% (one core)
+
+// Memory Usage: 50 MB
+// using promises
+
+(async () => {
+  console.time("writeMany");
+  const fileHandle = await fs.open("test.txt", "w");
+  for (let i = 0; i < 1000000; i++) {
+    await fileHandle.write(` ${i} `);
+  }
+  console.timeEnd("writeMany");
+})();
+
+
+===============================================
+
+rename  => rename(old , new)
+add => open(path,"a") => write("")
+create => open(path,"w") // append
+read => opem(path , "r")
+delete = > unlink(path)                        
+
+======================================================
+
+
+
+const fs = require("fs");
+const fs = require("fs/promises");
+/*
+Execution Time : 8 s
+CPU Usage: 100% (one core)
+Memory Usage: 50 MB
+NUMBER IS SORTING ASC
+*/
+(async () => {
+  console.time("writeMany");
+  const fileHandle = await fs.open("test.txt", "w");
+  for (let i = 0; i < 1000000; i++) {
+    await fileHandle.write(` ${i} `);
+  }
+  console.timeEnd("writeMany");
+})();
+
+// Execution Time : 1.6 s
+// CPU Usage: 100% (one core)
+// Memory Usage: 700 MB
+fs.open("test.txt", "a", (err, fd) => {
+  console.time("writeMany");
+  for (let i = 0; i < 1000000; i++) {
+    // NUMBERS will be sorting randomly
+    // fs.write(fd, ` ${i} `, () => {});
+    /*or
+     NUMBER IS SORTING ASC
+     */
+    // Memory Usage: 40 MB
+    // Execution Time : 5 ms
+    fs.writeSync(fd, ` ${i} `);
+  }
+  console.timeEnd("writeMany");
+});
+
+fs.open("test.txt", "a", (err, fd) => {
+  // Execution Time : 1.8s
+  // CPU Usage: 100% (one core)
+  // Memory Usage: 50 MB
+  console.time("writeMany");
+  for (let i = 0; i < 10; i++) {
+    const buff = Buffer.from(`${i}`, "utf-8");
+    console.log(buff);
+    fs.writeSync(fd, buff);
+  }
+  console.timeEnd("writeMany");
+});
+
+=====================================================================
