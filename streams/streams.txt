@@ -120,3 +120,202 @@ fs.open("test.txt", "a", (err, fd) => {
 });
 
 =====================================================================
+
+readstream
+
+// Readable streams
+// WritableStream - allow node js to write data to a stream   write/send data
+// readble streams - allow node js to read data from a stream
+// duplex - can read and write to a stream
+
+var http = require("http");
+var fs = require("fs");
+//                                      curr dir
+var myReadStream = fs.createReadStream(__dirname + "/readMe.txt", "utf-8");
+// iZa hadadna fo2 ano el character encoding..se3eta lah nestelem ka text
+// iza ma hadadna ..lan nestelem 3adad m3ayan men el buffer ..
+myReadStream.on("data", (chunk) => {
+  console.log("new chunck received: ");
+  console.log(chunk);
+});
+
+/*
+
+4:54
+going to fire back a function every time
+4:56
+we receive some data and then this data
+5:00
+is  called a chunk okay so we read
+5:04
+the file it fills up the buffer the
+5:06
+buffer passes that chunk on and every
+5:09
+time it passes a chunk of data on it
+5:12
+recognizes it because we're listening
+5:14
+for that data event and we find this
+5:15
+function okay so now what we could do
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=============================================
+
+1:37
+work so first of all what is a buffer a
+1:40
+buffer is just a temporary storage spot
+1:43
+for a chunk of data that's being
+1:44
+transferred from one place to another so
+1:47
+if we have a large amount of data we
+1:50
+want to move from point A to point B
+1:52
+then we can move it a little bit at a
+1:54
+time by gathering a small amount of it
+1:57
+in a buffer and then moving it on so
+2:00
+with transferring small chunks of data
+2:01
+at a time so it looks something like
+2:05
+this we have all of the data here and
+2:08
+you can compare this to that can be rock
+2:10
+in the story and we want to get all of
+2:13
+this day
+2:13
+different point A to B but instead of
+2:16
+waiting for all of that data to be
+2:17
+stored in memory what we do is we
+2:21
+transfer a little bit at a time and we
+2:23
+fill up this buffer okay which is a
+2:26
+temporary storage spot for that data the
+2:29
+buffer collects a small chunk of data
+2:31
+and then when the buffer is full the
+2:34
+data can be passed on and processed okay
+2:38
+so we know what a buffer is but what is
+2:40
+a stream in an extreme is pretty much
+2:43
+that it's just a stream of data that
+2:45
+flows over time from one place to
+2:47
+another so we'd have some kind of data
+2:50
+source over here and we're transferring
+2:53
+that to the claim and the data flows
+2:55
+down this stream into the buffer right
+2:59
+which collects a small chunk of data
+3:01
+together then when the buffer is full it
+3:04
+passes that chunk of data down the
+3:06
+stream to be processed and sent to the
+3:09
+client so you've probably heard about
+3:14
+streaming movies online and this is
+3:16
+buffers and streams in action we have
+3:19
+the movie which is all the data we need
+3:21
+to transfer since you want to watch it
+3:22
+all but we don't wait for all of that
+3:25
+movie data to be sent in one go before
+3:28
+watching it we just wait for these
+3:30
+chunks of data to be sent or to arrive
+3:33
+and then we can press play on the movie
+3:35
+and we generally say that we're waiting
+3:37
+for the movie - Buffy wrapper buffer
+3:38
+right so you can see the benefit of this
+3:42
+whole idea of streams and buffers right
+3:44
+there we can start consuming data even
+3:47
+before it's all arrived we don't have to
+3:50
+gather all of the data in memory first
+3:53
+and then consume it we can do it bit by
+3:55
+bit so why am I telling you all this
+4:00
+what on earth is he got to do with no
+4:02
+chairs well we can create streams to
+4:06
+read and write files in OTS which
+4:08
+because of the way streams and buffers
+4:10
+work can increase the performance of
+4:12
+your application and that's also true
+4:14
+when we're dealing with requests on our
+4:16
+node server and we're sending data back
+4:19
+to the client to be consumed so this all
+4:22
+ties in together so now we know how
+4:26
+streams and buffers were
+4:27
+we're going to go ahead in the next
+4:28
+tutorial and we're going to create some
+4:30
+streams and see how they work in nodejs
+4:33
+I'll see you guys it

@@ -9,7 +9,7 @@ const fs = require("fs/promises");
 
   const stream = fileHandle.createWriteStream();
 
-  for (let i = 0; i < 1000000; i++) {
+  for (let i = 0; i < 100000; i++) {
     const buff = Buffer.from(`${i} `, "utf-8");
     stream.write(buff);
   }
